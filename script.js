@@ -45,9 +45,10 @@ $(function () {
                console.log(icon)
                var temp=casts.list[i].main.temp
                console.log(temp)
+               var dateEl=$("<h5>").text(date.substr(0,10))
                var iconel=$("<img>").attr("src", iconurl)
-               var tempEl=$("<p>").text("Temp:"+temp+"°F")
-               $(id).html("<h5>"+date+"</h5>");
+               var tempEl=$("<p>").text("Temp: "+temp+"°F")
+               $(id).append(dateEl);
                $(id).append(iconel)
                $(id).append(tempEl)
 
