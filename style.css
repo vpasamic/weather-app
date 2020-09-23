@@ -1,0 +1,14 @@
+
+   .weather-card {
+    position: relative;
+  }
+  
+  #weather-icon {
+    height: 3.5rem;
+  }
+  
+  #weather-icon>img {
+    height: 100%;
+  }
+  
+  
