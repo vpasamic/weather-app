@@ -1,23 +1,31 @@
 var apiKey = "a173635b06badd101b76739c4a211fcf"
 var storedcities= (localStorage.getItem("storedcities"));
-var newbutton=$("<button>");
-     newbutton.addClass("btn");
-     newbutton.addClass("btn-block");
-     newbutton.addClass("btn-outline-primary");
-     newbutton.addClass("city");
-     newbutton.text(storedcities);
-     newbutton.attr("data-city", storedcities);
-       $("#storedcities").append(newbutton)
 
-console.log(storedcities)
+function createbutton(city){
+    var newbutton=$("<button>");
+    newbutton.addClass("btn");
+    newbutton.addClass("btn-block");
+    newbutton.addClass("btn-outline-primary");
+    newbutton.addClass("city");
+    newbutton.text(city);
+    newbutton.attr("data-city", city);
+    $("#storedcities").append(newbutton)}
+createbutton(storedcities)
 
 
 
 $(function () {
-
-
-
-   CurrentWeather(storedcities)
+    
+    function forecast(city){
+        var queryUrl ="https://api.openweathermap.org/data/2.5/forecast/daily?q=" + 
+        city + 
+        "&units=imperial&appid="+
+        apiKey+
+        "&cnt5"
+        console.log(queryUrl)
+    }
+    forecast(storedcities)
+    CurrentWeather(storedcities)
   
     function CurrentWeather(city) {
       var queryUrl =
@@ -62,15 +70,7 @@ $(function () {
       localStorage.setItem("storedcities",city)
       $("#search-input").val("");
       CurrentWeather(city);
-     var newbutton=$("<button>");
-     newbutton.addClass("btn");
-     newbutton.addClass("btn-block");
-     newbutton.addClass("btn-outline-primary");
-     newbutton.addClass("city");
-     newbutton.text(city);
-     newbutton.attr("data-city", city);
-       $("#storedcities").append(newbutton);
-
+      createbutton(city);
 
     })
 });
