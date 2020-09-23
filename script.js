@@ -1,4 +1,6 @@
-var apiKey = "a173635b06badd101b76739c4a211fcf"
+var apiKey = "eb0e93c5fe8ebf8135e10e9db3baecf5"
+
+//var apiKey="166a433c57516f51dfab1f7edaed8413"
 var storedcities= (localStorage.getItem("storedcities"));
 
 function createbutton(city){
@@ -17,12 +19,33 @@ createbutton(storedcities)
 $(function () {
     
     function forecast(city){
-        var queryUrl ="https://api.openweathermap.org/data/2.5/forecast/daily?q=" + 
+        var queryUrl ="https://api.openweathermap.org/data/2.5/forecast?q=" + 
         city + 
         "&units=imperial&appid="+
-        apiKey+
-        "&cnt5"
-        console.log(queryUrl)
+        apiKey;
+        $.ajax({
+            url: queryUrl,
+            method: "GET",
+          }).then(function(casts){
+              console.log(casts)
+              var x=0
+           for(var i=3;i<=35;i+=8){
+               x= x+1
+               var id ="#hour-"+x
+               console.log(id)
+                var date =casts.list[i].dt_txt
+             console.log(date)
+               var icon="http://openweathermap.org/img/w/"+casts.list[i].icon+".png"
+               console.log(icon)
+               var temp=casts.list[i].main.temp
+               console.log(temp)
+               $(id).html("<h5>" + date +"</h5>")
+               $(id).append("<img src="+icon+">")
+               $(id).append("<p>Temp:" +temp + "</p>")
+            console.log(casts.list[i])
+           }
+          })
+       
     }
     forecast(storedcities)
     CurrentWeather(storedcities)
@@ -37,10 +60,10 @@ $(function () {
         url: queryUrl,
         method: "GET",
       }).then(function (data) {
-        console.log(data);
+          
         $("#city-name").text(data.name + " Weather");
         var iconUrl ="https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
-        console.log(iconUrl)
+        
         var iconImg = $("<img>").attr("src", iconUrl);
         $("#weather-icon").empty();
         $("#weather-icon").append(iconImg)
