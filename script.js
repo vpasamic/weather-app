@@ -11,8 +11,13 @@ function createbutton(city){
     newbutton.addClass("city");
     newbutton.text(city);
     newbutton.attr("data-city", city);
-    $("#storedcities").append(newbutton)}
-createbutton(storedcities)
+    $("#storedcities").append(newbutton)
+}
+
+if (storedcities !=='undefined'&& storedcities!==null){
+    createbutton
+}
+  
 
 
 
@@ -39,16 +44,14 @@ $(function () {
                console.log(icon)
                var temp=casts.list[i].main.temp
                console.log(temp)
-               $(id).html("<h5>" + date +"</h5>")
-               $(id).append("<img src="+icon+">")
-               $(id).append("<p>Temp:" +temp + "</p>")
             console.log(casts.list[i])
            }
           })
        
     }
+    if (storedcities !=='undefined'&& storedcities!==null){
     forecast(storedcities)
-    CurrentWeather(storedcities)
+    CurrentWeather(storedcities)}
   
     function CurrentWeather(city) {
       var queryUrl =
