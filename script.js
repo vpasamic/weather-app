@@ -36,14 +36,21 @@ $(function () {
               var x=0
            for(var i=3;i<=35;i+=8){
                x= x+1
-               var id ="#hour-"+x
+               var id ="#day-"+x
                console.log(id)
                 var date =casts.list[i].dt_txt
-             console.log(date)
-               var icon="http://openweathermap.org/img/w/"+casts.list[i].icon+".png"
+                var icon=casts.list[i].weather[0].icon
+               var iconurl="https://openweathermap.org/img/wn/"+icon+"@2x.png"
+               console.log(iconurl)
                console.log(icon)
                var temp=casts.list[i].main.temp
                console.log(temp)
+               var iconel=$("<img>").attr("src", iconurl)
+               var tempEl=$("<p>").text("Temp:"+temp+"°F")
+               $(id).html("<h5>"+date+"</h5>");
+               $(id).append(iconel)
+               $(id).append(tempEl)
+
             console.log(casts.list[i])
            }
           })
